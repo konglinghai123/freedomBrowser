@@ -1,0 +1,47 @@
+<idea-plugin version="2">
+    <id>kong.browser</id>
+    <name>kong.browser</name>
+    <version>1.0</version>
+    <vendor email="823894716@qq.com" url=""></vendor>
+
+    <description><![CDATA[
+      idea 内置浏览器插件，用这个插件你可以创建你的书签，并在idea中打开它，边看小说，边写代码，美滋滋！
+      fork from https://github.com/hsyed/blast.browser.git
+      修改于以上的开源项目，但是他使用的收费版本的jxbrowser,而我的版本是终身免费版。
+    ]]></description>
+
+    <change-notes><![CDATA[
+
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="162.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <virtualFileSystem key="browserfs"
+                           implementationClass="kong.browser.components.BrowserStorageVirtualFilesystem"/>
+        <fileEditorProvider implementation="kong.browser.components.BrowserEditorProvider"/>
+
+        <applicationService serviceInterface="kong.browser.components.BookmarkManagerImpl"
+                            serviceImplementation="kong.browser.components.BookmarkManagerImpl"/>
+
+        <toolWindow id="Bookmarks" anchor="left" secondary="true" icon="AllIcons.Xml.Browsers.Chromium16"
+                    factoryClass="kong.browser.components.BookmarkTreeViewToolWindow"/>
+
+        <fileIconProvider implementation="kong.browser.components.BrowserFileIconProvider" order="first"/>
+    </extensions>
+
+
+    <actions>
+        <action id="AddNewBrowserBookmark" text="bookmark" icon="AllIcons.General.Web"
+                class="kong.browser.components.AddBMAction"/>
+    </actions>
+
+</idea-plugin>
